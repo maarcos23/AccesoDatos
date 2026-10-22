@@ -13,6 +13,7 @@ public class Contactos implements Serializable{
 	
 	public Contactos(int id, String nombre, long tlf) {
 		// TODO Auto-generated constructor stub
+		
 		this.id= id;
 		this.nombre= nombre;
 		this.tlf = tlf;

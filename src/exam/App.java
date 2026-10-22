@@ -34,12 +34,14 @@ public class App {
 				String nom = sc.nextLine();
 			System.out.println("Precio del producto: ");
 				double precio = sc.nextDouble();
+				sc.nextLine();
 					Productos p = new Productos(codigo, nom, precio);
 						gp.nProducto(p);
 			break;
 		case 2:
 			System.out.println("Codigo del producto: ");
 				int cod = sc.nextInt();
+				sc.nextLine();
 					gp.lProducto(cod);
 			break;
 		case 3:
@@ -74,6 +76,7 @@ public class App {
 		case 7:
 			System.out.println("id del contacto a eliminar: ");
 			int idE = sc.nextInt();
+			sc.nextLine();
 			gc.eContactos(idE);
 			break;
 		case 0:

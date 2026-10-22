@@ -18,6 +18,7 @@ public class GestionContactos {
 	public GestionContactos() {
 		// TODO Auto-generated constructor stub
 		this.listC = new ArrayList<>();
+		
 		cContactos();
 	}
 
