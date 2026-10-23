@@ -31,11 +31,11 @@ public class Main {
 				break;
 			}
 			
-			System.out.println("Nombre del libro: ");
+				System.out.println("Nombre del libro: ");
 			String titulo = sc.nextLine();
-			System.out.println("Autor del libro: ");
+				System.out.println("Autor del libro: ");
 			String autor = sc.nextLine();
-			System.out.println("Precio del libro: ");
+				System.out.println("Precio del libro: ");
 			double precio = sc.nextDouble();			
 			sc.nextLine();
 			

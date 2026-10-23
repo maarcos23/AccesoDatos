@@ -6,96 +6,108 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class GestionContactos {
 
-	File f = new File("contactos.dat");
 	private List<Contactos> listC;
+	static File fi = new File("contactos.dat");
+	static Scanner sc = new Scanner(System.in);
+
 	
 	public GestionContactos() {
 		// TODO Auto-generated constructor stub
-		this.listC = new ArrayList<>();
-		cContactos();
+		listC = new ArrayList<>();
+		cargar();
 	}
 
-	private void cContactos() {	//cargar Contatcos
+	public void cargar() {
+		if(!fi.exists()) {
+			System.out.println("No hay fichero aun");
+		}
+		try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fi))){
+			try {
+				listC = (List<Contactos>) ois.readObject();
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void agregar(Contactos nuevo) {
 		// TODO Auto-generated method stub
-		if(!f.exists() || f.length() == 0) {
+		
+		for(Contactos c : listC ) {
+			if(c.getId() == nuevo.getId()) {
+				System.out.println("Ese id ya esta en uso");
+				return;
+			}
+		}
+		listC.add(nuevo);
+		guardar();
+		System.out.println("Contacto guardado");
+	}
+	
+	public void guardar() {
+		try(ObjectOutput oos = new ObjectOutputStream(new FileOutputStream(fi))){
+			oos.writeObject(listC);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public void lista() {
+		// TODO Auto-generated method stub
+		if(!fi.exists()) {
+			System.out.println("No hay fichero");
 			return;
 		}
-		try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(f))) {
-	        listC = (List<Contactos>) ois.readObject();
-	    } catch (IOException | ClassNotFoundException e) {
-	        System.out.println("Error al cargar contactos: " + e.getMessage());
-	    }
-		
+		try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fi))){
+			cargar();
+			for(Contactos c: listC) {
+				if(!c.isEliminado() ) {
+				System.out.println(c.toString());
+				}
+			}
+			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
-		public void gContacto() {	//guardar Contacto
-			try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(f))){
-				oos.writeObject(listC);
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} 		
-		}
+	public void eliminar() {
+		// TODO Auto-generated method stub
 		
-		public void nContacto(Contactos c) {	//nuevo contacto
-				// TODO Auto-generated method stub
-				for(Contactos co : listC) {
-					if(co.getId() == c.getId()) {
-						System.out.println("Ese id de contacto ya existe");
-						return;
-					}
-				}
-				listC.add(c);
-				gContacto();
-				System.out.println("Contacto guardado");
 			
-			}
-
-		public void mContactos() {	//mostrar contactos
-			// TODO Auto-generated method stub
-			
-			boolean hc = false;//hay contactos
-				for (Contactos co: listC) {
-					if (!co.isEliminado()) {
-						System.out.println(co.toString());
-						hc = true;
-					}
-				}
-				if(!hc) {
-					System.out.println("No hay contactos activos");
-				}
-			
-			
-		}
-
-		public void eContactos(int idE) {	//Eliminar Contactos
-			// TODO Auto-generated method stub
-			for (Contactos c : listC) {
-				if(c.getId() == idE && !c.isEliminado()) {
-					c.setEliminado(true);
-					gContacto();
-					System.out.println("Contacto eliminado");
-					return;
-				}
-			}
-			System.out.println("No se ha podido eliminar");
-		}
-		public Contactos bId(int id) {
-			for (Contactos c: listC) {
+			System.out.println("Id del contacto a eliminar");
+			int id = sc.nextInt();
+			sc.nextLine();
+			for(Contactos c : listC) {
 				if(c.getId() == id && !c.isEliminado()) {
-					return c;
-				}
-			}
-			return null;
-		}
-		
+					c.setEliminado(true);
+					guardar();
+					System.out.println("Contacto eliminado");
+				return;			
+			}		
+		}	
+	}
 }
