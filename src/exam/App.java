@@ -87,6 +87,7 @@ public class App {
 			System.out.println("Nombre del producto: ");
 		nombre = sc.nextLine();
 			System.out.println("Precio del producto: ");
+<<<<<<< HEAD
 		precio = sc.nextDouble();
 	
 		try(RandomAccessFile raf = new RandomAccessFile(f, "rw")){
@@ -105,6 +106,56 @@ public class App {
 		}
 		for(int i =0; i< sb.length(); i++) {
 			raf.writeChar(sb.charAt(i));
+=======
+				double precio = sc.nextDouble();
+				sc.nextLine();
+					Productos p = new Productos(codigo, nom, precio);
+						gp.nProducto(p);
+			break;
+		case 2:
+			System.out.println("Codigo del producto: ");
+				int cod = sc.nextInt();
+				sc.nextLine();
+					gp.lProducto(cod);
+			break;
+		case 3:
+			System.out.println("Codigo del producto a actualizar");
+				int codi = sc.nextInt();
+				sc.nextLine();
+			System.out.println("Nuevo precio del producto: ");
+				int preci = sc.nextInt();
+					gp.aProducto(codi, preci);
+			break;
+		case 4:
+			gp.mCProductos();
+			break;
+		case 5:
+			System.out.println("Id del contacto: ");
+				int id = sc.nextInt();
+				sc.nextLine();
+				if(gc.bId(id) != null) {
+					System.out.println("EL id "+ id+(" ya esta en uso"));
+					break;
+				}
+			System.out.println("Nombre del contacto: ");
+				String nombre = sc.nextLine();
+			System.out.println("Nº de telefono: ");
+				long tlf = sc.nextLong();
+					Contactos c = new Contactos(id, nombre, tlf);
+					gc.nContacto(c);
+			break;
+		case 6:
+			gc.mContactos();
+			break;
+		case 7:
+			System.out.println("id del contacto a eliminar: ");
+			int idE = sc.nextInt();
+			sc.nextLine();
+			gc.eContactos(idE);
+			break;
+		case 0:
+			System.out.println("Adios");
+>>>>>>> branch 'master' of https://github.com/maarcos23/AccesoDatos
 		}
 		
 		raf.writeDouble(precio);

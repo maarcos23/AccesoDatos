@@ -21,8 +21,14 @@ public class GestionContactos {
 	
 	public GestionContactos() {
 		// TODO Auto-generated constructor stub
+<<<<<<< HEAD
 		listC = new ArrayList<>();
 		cargar();
+=======
+		this.listC = new ArrayList<>();
+		
+		cContactos();
+>>>>>>> branch 'master' of https://github.com/maarcos23/AccesoDatos
 	}
 
 	public void cargar() {

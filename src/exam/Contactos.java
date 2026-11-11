@@ -10,10 +10,19 @@ public class Contactos implements Serializable{
 	private long tlf;
 	private boolean eliminado;
 	public Contactos(int id, String nombre, long tlf) {
+<<<<<<< HEAD
 		this.id=id;
 		this.nombre=nombre;
 		this.tlf=tlf;
 		this.eliminado=false;
+=======
+		// TODO Auto-generated constructor stub
+		
+		this.id= id;
+		this.nombre= nombre;
+		this.tlf = tlf;
+		this.eliminado= false;
+>>>>>>> branch 'master' of https://github.com/maarcos23/AccesoDatos
 		
 	}
 	public int getId() {
