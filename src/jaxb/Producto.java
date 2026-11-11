@@ -25,6 +25,7 @@ public class Producto {
     public Producto() {
     }
 
+    
     // 2. Constructor completo
     public Producto(int id, String nombre, double precio, int stock) {
         this.id = id;

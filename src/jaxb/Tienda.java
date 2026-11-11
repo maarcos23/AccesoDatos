@@ -21,6 +21,7 @@ public class Tienda {
     public List<Producto> getListaProductos() {
         return listaProductos;
     }
+    
 
     public void setListaProductos(List<Producto> listaProductos) {
         this.listaProductos = listaProductos;

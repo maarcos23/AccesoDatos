@@ -50,6 +50,7 @@ public class GestionInventario {
             if (p.getId() == id) {
                 return p;
             }
+            
         }
         return null;
     }

@@ -31,6 +31,7 @@ public class App {
                     gestor.listarProductos();
                     break;
 
+                    
                 case 2:
                     System.out.print("ID del producto: ");
                     int id = sc.nextInt();
