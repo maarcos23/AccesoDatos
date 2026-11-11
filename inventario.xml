@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<tienda>
+    <producto id="1">
+        <nombre>marc</nombre>
+        <precio>23.0</precio>
+        <stock>2</stock>
+    </producto>
+    <producto id="2">
+        <nombre>socram</nombre>
+        <precio>4.0</precio>
+        <stock>6</stock>
+    </producto>
+</tienda>
