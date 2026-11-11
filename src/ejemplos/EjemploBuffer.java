@@ -17,6 +17,7 @@ public class EjemploBuffer {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        
 
         // Operación de Entrada (Lectura línea a línea con buffer)
         try (BufferedReader br = new BufferedReader(new FileReader("frases.txt"))) {
