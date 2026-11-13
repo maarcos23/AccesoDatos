@@ -42,15 +42,6 @@ public class GestionInventario {
         }
     }
 
-    public Producto buscarProducto(int id) {
-        for (Producto p : tienda.getListaProductos()) {
-            if (p.getId() == id) {
-                return p;
-            }
-        }
-        return null;
-    }
-
     public void agregarProducto(Producto nuevo) {
         if (buscarProducto(nuevo.getId()) != null) {
             System.out.println("El producto con ID " + nuevo.getId() + " ya existe.");
@@ -69,6 +60,102 @@ public class GestionInventario {
         System.out.println("\n--- INVENTARIO DE LA TIENDA ---");
         for (Producto p : tienda.getListaProductos()) {
             System.out.println(p);
+        }
+    }
+
+    // 1. Buscar un producto por ID
+    public Producto buscarProducto(int id) {
+        for (Producto p : tienda.getListaProductos()) {
+            if (p.getId() == id) {
+                return p;
+            }
+        }
+        return null;
+    }
+
+    // 2. Actualizar la cantidad (stock) de un producto específico
+    public void actualizarCantidad(int id, int nuevaCantidad) {
+        Producto p = buscarProducto(id);
+        if (p == null) {
+            System.out.println("No se encontró ningún producto con ID " + id);
+            return;
+        }
+        p.setStock(nuevaCantidad);
+        guardarXML();
+        System.out.println("Cantidad actualizada con éxito.");
+    }
+
+    // 3. Actualizar el precio de un producto específico
+    public void actualizarPrecio(int id, double nuevoPrecio) {
+        Producto p = buscarProducto(id);
+        if (p == null) {
+            System.out.println("No se encontró ningún producto con ID " + id);
+            return;
+        }
+        p.setPrecio(nuevoPrecio);
+        guardarXML();
+        System.out.println("Precio actualizado con éxito.");
+    }
+
+    // 4. Eliminar un producto del inventario
+    public void eliminarProducto(int id) {
+        Producto p = buscarProducto(id);
+        if (p == null) {
+            System.out.println("No se encontró ningún producto con ID " + id);
+            return;
+        }
+        tienda.getListaProductos().remove(p);
+        guardarXML();
+        System.out.println("Producto eliminado del inventario.");
+    }
+
+    // 5. Calcular el valor total de los productos en inventario (precio * stock)
+    public double calcularValorTotal() {
+        double total = 0;
+        for (Producto p : tienda.getListaProductos()) {
+            total += p.getPrecio() * p.getStock();
+        }
+        return total;
+    }
+
+    // 6. Filtrar productos por precio mínimo o máximo
+    public void filtrarPorPrecioMinimo(double min) {
+        boolean encontrado = false;
+        for (Producto p : tienda.getListaProductos()) {
+            if (p.getPrecio() >= min) {
+                System.out.println(p);
+                encontrado = true;
+            }
+        }
+        if (!encontrado) {
+            System.out.println("No hay productos con precio mayor o igual a " + min + "€");
+        }
+    }
+
+    public void filtrarPorPrecioMaximo(double max) {
+        boolean encontrado = false;
+        for (Producto p : tienda.getListaProductos()) {
+            if (p.getPrecio() <= max) {
+                System.out.println(p);
+                encontrado = true;
+            }
+        }
+        if (!encontrado) {
+            System.out.println("No hay productos con precio menor o igual a " + max + "€");
+        }
+    }
+
+    // 7. Encontrar productos con cantidad menor a un valor específico
+    public void filtrarPorStockMenor(int limite) {
+        boolean encontrado = false;
+        for (Producto p : tienda.getListaProductos()) {
+            if (p.getStock() < limite) {
+                System.out.println(p);
+                encontrado = true;
+            }
+        }
+        if (!encontrado) {
+            System.out.println("No hay productos con stock inferior a " + limite);
         }
     }
 }
